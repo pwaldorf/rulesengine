@@ -15,7 +15,7 @@ public class SampleJavaRule implements JavaRule<Map<String, Object>, Map<String,
     }
 
     @Override
-    public void execute(Map<String, Object> context) {
+    public void pass(Map<String, Object> context) {
         System.out.println("Java Rule Executed");
     }
 

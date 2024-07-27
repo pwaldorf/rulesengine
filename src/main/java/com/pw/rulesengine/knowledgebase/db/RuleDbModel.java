@@ -38,8 +38,17 @@ public class RuleDbModel {
     @Column(name = "condition")
     private String condition;
 
-    @Column(name = "action")
-    private String action;
+    @Column(name = "pass")
+    private String pass;
+
+    @Column(name = "fail")
+    private String fail;
+
+    @Column(name = "always")
+    private String always;
+
+    @Column(name = "context")
+    private String context;
 
     @Column(name = "class_name")
     private String className;
@@ -50,11 +59,23 @@ public class RuleDbModel {
     @Column(name = "condition_bean_method")
     private String conditionBeanMethod;
 
-    @Column(name = "action_bean_name")
-    private String actionBeanName;
+    @Column(name = "pass_bean_name")
+    private String passBeanName;
 
-    @Column(name = "action_bean_method")
-    private String actionBeanMethod;
+    @Column(name = "pass_bean_method")
+    private String passBeanMethod;
+
+    @Column(name = "fail_bean_name")
+    private String failBeanName;
+
+    @Column(name = "fail_bean_method")
+    private String failBeanMethod;
+
+    @Column(name = "always_bean_name")
+    private String alwaysBeanName;
+
+    @Column(name = "always_bean_method")
+    private String alwaysBeanMethod;
 
     @Column(name = "description")
     private String description;

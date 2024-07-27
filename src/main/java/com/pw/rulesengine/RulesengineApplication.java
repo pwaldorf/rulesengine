@@ -7,6 +7,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 
+import com.pw.rulesengine.controller.RulesController;
+
 @SpringBootApplication
 public class RulesengineApplication {
 

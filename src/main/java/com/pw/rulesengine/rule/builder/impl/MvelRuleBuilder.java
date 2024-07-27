@@ -12,7 +12,7 @@ public class MvelRuleBuilder implements RuleBuilder {
 
     @Override
     public Rule build(RuleTemplate ruleTemplate) {
-        return new MvelRule(ruleTemplate.getCondition(), ruleTemplate.getAction());
+        return new MvelRule(ruleTemplate.getExpression());
     }
 
     @Override

@@ -24,8 +24,11 @@ public class RuleEngine {
         if (rules != null) {
             for (Rule rule : rules.values()) {
                 if (rule.evaluate(context)) {
-                    rule.execute(context);
+                    rule.pass(context);
+                } else {
+                    rule.fail(context);
                 }
+                rule.always(context);
             }
         } else {
             log.info("No rules found for ruleset: {}", rulesetName);

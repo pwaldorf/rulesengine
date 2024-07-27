@@ -21,10 +21,7 @@ public class SpringRuleBuilder implements RuleBuilder {
     @Override
     public Rule build(RuleTemplate ruleTemplate) {
         return new SpringRule(applicationContext,
-                ruleTemplate.getEvaluateBeanName(),
-                ruleTemplate.getEvaluateMethodName(),
-                ruleTemplate.getExecuteBeanName(),
-                ruleTemplate.getExecuteMethodName());
+                ruleTemplate.getSpringMethod());
     }
 
     @Override

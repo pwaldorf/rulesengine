@@ -19,15 +19,11 @@ public class DefaultRuleTemplate implements RuleTemplate {
     private String description;
 
     // MVEL Rules
-    private String condition;
-    private String action;
+    private DefaultExpression expression;
 
     // JAVA Rules
     private String className;
 
     // Spring Rules
-    private String evaluateBeanName;
-    private String evaluateMethodName;
-    private String executeBeanName;
-    private String executeMethodName;
+    private DefaultSpringMethod springMethod;
 }
