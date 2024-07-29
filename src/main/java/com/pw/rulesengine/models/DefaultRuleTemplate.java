@@ -15,14 +15,16 @@ public class DefaultRuleTemplate implements RuleTemplate {
     private String rulesetName;
     private String ruleId;
     private Integer priority;
-    private String type;
+    private String conditionType;
+    private String actionType;
     private String description;
 
     // MVEL Rules
     private DefaultExpression expression;
 
     // JAVA Rules
-    private String className;
+    private String conditionClassName;
+    private String actionClassName;
 
     // Spring Rules
     private DefaultSpringMethod springMethod;

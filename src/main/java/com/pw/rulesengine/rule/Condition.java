@@ -1,6 +1,5 @@
 package com.pw.rulesengine.rule;
 
-public interface Condition<T> {
-    String getConditionType();
-    boolean evaluate(T o);
+public interface Condition<T> extends Definition{
+    boolean evaluate(T t);
 }

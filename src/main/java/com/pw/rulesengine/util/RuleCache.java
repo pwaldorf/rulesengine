@@ -6,7 +6,8 @@ import java.util.concurrent.ConcurrentHashMap;
 import org.springframework.stereotype.Component;
 
 import com.pw.rulesengine.rule.Rule;
-import com.pw.rulesengine.rule.RuleFactory;
+import com.pw.rulesengine.rule.builder.DefaultRuleBuilder;
+import com.pw.rulesengine.rule.builder.RuleFactory;
 import com.pw.rulesengine.ruleengine.KnowledgeBaseRepository;
 
 import lombok.extern.slf4j.Slf4j;
@@ -35,7 +36,7 @@ public class RuleCache {
         Map<String, Rule> rules = new ConcurrentHashMap<>();
 
         knowledgeBaseRepository.getAllRuleByRuleSetName(rulesetName).forEach(ruleTemplate -> {
-            rules.put(ruleTemplate.getRuleId(), ruleFactory.getRuleBuilder(ruleTemplate.getType().toUpperCase()).build(ruleTemplate));
+            rules.put(ruleTemplate.getRuleId(), new DefaultRuleBuilder(ruleFactory).build(ruleTemplate));
         });;
 
         return rules;

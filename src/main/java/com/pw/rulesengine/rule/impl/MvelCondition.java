@@ -6,34 +6,35 @@ import java.util.Map;
 import org.apache.commons.lang3.StringUtils;
 import org.mvel2.MVEL;
 
-import com.pw.rulesengine.models.DefaultExpression;
 import com.pw.rulesengine.rule.Condition;
 
 public class MvelCondition<T> implements Condition<T> {
 
-    private final DefaultExpression expression;
+    private final String expression;
+    private final Map<String, Object> context;
 
     private Serializable compiledEvaluateExpression;
 
-    public MvelCondition(DefaultExpression expression) {
+    public MvelCondition(String expression, Map<String, Object> context) {
         this.expression = expression;
+        this.context = context;
 
-        this.compiledEvaluateExpression = StringUtils.isNotBlank(expression.getEvaluateExpression()) ? MVEL.compileExpression(expression.getEvaluateExpression()) : null;
+        this.compiledEvaluateExpression = StringUtils.isNotBlank(expression) ? MVEL.compileExpression(expression) : null;
     }
 
     @Override
-    public String getConditionType() {
+    public String getType() {
         return "MVEL";
     }
 
     @SuppressWarnings("unchecked")
     @Override
     public boolean evaluate(T o) {
-        if (StringUtils.isBlank(expression.getEvaluateExpression())) {
+        if (StringUtils.isBlank(expression)) {
             return true;
         }
         if (o instanceof Map) {
-            ((Map<String, Object>) o).putAll(expression.getContext());
+            ((Map<String, Object>) o).putAll(context);
         }
         return MVEL.executeExpression(compiledEvaluateExpression, o, Boolean.class);
     }

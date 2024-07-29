@@ -32,8 +32,11 @@ public class RuleDbModel {
     @Column(name = "priority")
     private Integer priority;
 
-    @Column(name = "type")
-    private String type;
+    @Column(name = "condition_type")
+    private String conditionType;
+
+    @Column(name = "action_type")
+    private String actionType;
 
     @Column(name = "condition")
     private String condition;
@@ -50,8 +53,11 @@ public class RuleDbModel {
     @Column(name = "context")
     private String context;
 
-    @Column(name = "class_name")
-    private String className;
+    @Column(name = "condition_class_name")
+    private String conditionClassName;
+
+    @Column(name = "action_class_name")
+    private String actionClassName;
 
     @Column(name = "condition_bean_name")
     private String conditionBeanName;

@@ -6,65 +6,37 @@ import java.util.Map;
 import org.apache.commons.lang3.StringUtils;
 import org.mvel2.MVEL;
 
-import com.pw.rulesengine.models.DefaultExpression;
 import com.pw.rulesengine.rule.Action;
 
 public class MvelAction<U> implements Action<U> {
 
-    private final DefaultExpression expression;
+    private final String expression;
+    private final Map<String, Object> context;
 
-    private Serializable compiledPassExpression;
-    private Serializable compiledFailExpression;
-    private Serializable compiledAlwaysExpression;
+    private Serializable compiledExpression;
 
-    public  MvelAction(DefaultExpression expression) {
+    public  MvelAction(String expression, Map<String, Object> context) {
         this.expression = expression;
+        this.context = context;
 
-        this.compiledPassExpression = StringUtils.isNotBlank(expression.getPassExpression()) ? MVEL.compileExpression(expression.getPassExpression()) : null;
-        this.compiledFailExpression = StringUtils.isNotBlank(expression.getFailExpression()) ? MVEL.compileExpression(expression.getFailExpression()) : null;
-        this.compiledAlwaysExpression = StringUtils.isNotBlank(expression.getAlwaysExpression()) ? MVEL.compileExpression(expression.getAlwaysExpression()) : null;
+        this.compiledExpression = StringUtils.isNotBlank(expression) ? MVEL.compileExpression(expression) : null;
+
     }
 
-
     @Override
-    public String getActionType() {
+    public String getType() {
         return "MVEL";
     }
 
     @SuppressWarnings("unchecked")
     @Override
-    public void pass(U u) {
-        if(StringUtils.isBlank(expression.getPassExpression())) {
+    public void execute(U o) {
+        if(StringUtils.isBlank(expression)) {
             return;
         }
-        if (u instanceof Map) {
-            ((Map<String, Object>) u).putAll(expression.getContext());
+        if (o instanceof Map) {
+            ((Map<String, Object>) o).putAll(context);
         }
-        MVEL.executeExpression(compiledPassExpression, u, Void.class);
+        MVEL.executeExpression(compiledExpression, o, Void.class);
     }
-
-    @SuppressWarnings("unchecked")
-    @Override
-    public void fail(U u) {
-        if(StringUtils.isBlank(expression.getFailExpression())) {
-            return;
-        }
-        if (u instanceof Map) {
-            ((Map<String, Object>) u).putAll(expression.getContext());
-        }
-        MVEL.executeExpression(compiledFailExpression, u, Void.class);
-    }
-
-    @SuppressWarnings("unchecked")
-    @Override
-    public void always(U u) {
-        if(StringUtils.isBlank(expression.getAlwaysExpression())) {
-            return;
-        }
-        if (u instanceof Map) {
-            ((Map<String, Object>) u).putAll(expression.getContext());
-        }
-        MVEL.executeExpression(compiledAlwaysExpression, u, Void.class);
-    }
-
 }

@@ -9,6 +9,8 @@ import com.pw.rulesengine.util.RuleCache;
 
 import lombok.extern.slf4j.Slf4j;
 
+
+//Create ruleenginefactory for different rule patterns
 @Slf4j
 @Service
 public class RuleEngine {
@@ -23,12 +25,9 @@ public class RuleEngine {
         Map<String, Rule> rules = ruleCache.getRuleset(rulesetName);
         if (rules != null) {
             for (Rule rule : rules.values()) {
-                if (rule.evaluate(context)) {
-                    rule.pass(context);
-                } else {
-                    rule.fail(context);
+                if (rule.getCondition().evaluate(context)) {
+                    rule.getAction().execute(context);
                 }
-                rule.always(context);
             }
         } else {
             log.info("No rules found for ruleset: {}", rulesetName);

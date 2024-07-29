@@ -68,9 +68,11 @@ public class KnowledgeBaseService implements KnowledgeBaseRepository{
                 .rulesetName(ruleDbModel.getRulesetName().toUpperCase())
                 .ruleId(ruleDbModel.getRuleId().toUpperCase())
                 .priority(ruleDbModel.getPriority())
-                .type(ruleDbModel.getType().toUpperCase())
+                .conditionType(ruleDbModel.getConditionType().toUpperCase())
+                .actionType(ruleDbModel.getActionType().toUpperCase())
                 .expression(defaultExpression)
-                .className(ruleDbModel.getClassName())
+                .conditionClassName(ruleDbModel.getConditionClassName())
+                .actionClassName(ruleDbModel.getActionClassName())
                 .springMethod(springMethod)
                 .description(ruleDbModel.getDescription())
                 .build();
