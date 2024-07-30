@@ -3,16 +3,16 @@ package com.pw.rulesengine.controller;
 import java.util.Map;
 
 import org.springframework.stereotype.Service;
-import com.pw.rulesengine.ruleengine.RuleEngine;
+import com.pw.rulesengine.ruleengine.DefaultRuleEngine;
 
 // using controller class incase a factory for different ruleengines is made
 
 @Service
 public class RulesController {
 
-    private final RuleEngine ruleEngine;
+    private final DefaultRuleEngine ruleEngine;
 
-    public RulesController(RuleEngine ruleEngine) {
+    public RulesController(DefaultRuleEngine ruleEngine) {
         this.ruleEngine = ruleEngine;
     }
 

@@ -1,5 +1,5 @@
 package com.pw.rulesengine.rule.builder;
 
-public interface Builder<T, U, V> {
-    T build(U u, V v);
+public interface Builder<T, U> {
+    T build(U u);
 }

@@ -7,7 +7,7 @@ import com.pw.rulesengine.rule.impl.JavaCondition;
 import lombok.NoArgsConstructor;
 
 @NoArgsConstructor
-public class SampleJavaCondition implements JavaCondition<Map<String, Object>, Map<String, Object>> {
+public class SampleJavaCondition implements JavaCondition<Map<String, Object>> {
 
     @Override
     public boolean evaluate(Map<String, Object> context) {

@@ -1,5 +1,5 @@
 package com.pw.rulesengine.rule;
 
 public interface Action<U> extends Definition {
-    void execute(U o);
+    void execute(U u);
 }

@@ -29,14 +29,14 @@ public class MvelCondition<T> implements Condition<T> {
 
     @SuppressWarnings("unchecked")
     @Override
-    public boolean evaluate(T o) {
+    public boolean evaluate(T t) {
         if (StringUtils.isBlank(expression)) {
             return true;
         }
-        if (o instanceof Map) {
-            ((Map<String, Object>) o).putAll(context);
+        if (t instanceof Map) {
+            ((Map<String, Object>) t).putAll(context);
         }
-        return MVEL.executeExpression(compiledEvaluateExpression, o, Boolean.class);
+        return MVEL.executeExpression(compiledEvaluateExpression, t, Boolean.class);
     }
 
 }

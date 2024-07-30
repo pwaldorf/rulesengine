@@ -6,21 +6,23 @@ import com.pw.rulesengine.rule.Rule;
 import com.pw.rulesengine.rule.impl.DefaultRule;
 import com.pw.rulesengine.ruleengine.RuleTemplate;
 
-public class DefaultRuleBuilder implements RuleBuilder{
+@SuppressWarnings("rawtypes")
+public class DefaultRuleBuilder<T, U> implements RuleBuilder<Rule, RuleTemplate> {
 
-    private final RuleFactory ruleFactory;
+    private final RuleFactory<T, U> ruleFactory;
 
-    public DefaultRuleBuilder(RuleFactory ruleFactory) {
+    public DefaultRuleBuilder(RuleFactory<T, U> ruleFactory) {
         this.ruleFactory = ruleFactory;
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public Rule build(RuleTemplate ruleTemplate) {
 
-        Condition condition = ruleFactory.getConditionBuilder(ruleTemplate.getConditionType()).build(ruleTemplate);
-        Action action = ruleFactory.getActionBuilder(ruleTemplate.getActionType()).build(ruleTemplate);
+        Condition<T> condition = ruleFactory.getConditionBuilder(ruleTemplate.getConditionType()).build(ruleTemplate);
+        Action<U> action = ruleFactory.getActionBuilder(ruleTemplate.getActionType()).build(ruleTemplate);
 
-        return new DefaultRule(condition, action);
+        return new DefaultRule<T, U>(condition, action);
 
     }
 

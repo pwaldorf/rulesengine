@@ -3,7 +3,7 @@ package com.pw.rulesengine.rule.builder;
 import com.pw.rulesengine.rule.Action;
 import com.pw.rulesengine.ruleengine.RuleTemplate;
 
-public interface ActionBuilder<T> {
+public interface ActionBuilder<U> extends Builder<Action<U>, RuleTemplate> {
     String getType();
-    Action<T> build(RuleTemplate ruletemplate);
+    Action<U> build(RuleTemplate ruletemplate);
 }

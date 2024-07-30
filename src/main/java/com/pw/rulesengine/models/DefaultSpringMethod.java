@@ -1,5 +1,7 @@
 package com.pw.rulesengine.models;
 
+import com.pw.rulesengine.rule.SpringMethod;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -9,7 +11,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-public class DefaultSpringMethod {
+public class DefaultSpringMethod implements SpringMethod {
     private String evaluateBeanName;
     private String evaluateMethodName;
     private String passBeanName;

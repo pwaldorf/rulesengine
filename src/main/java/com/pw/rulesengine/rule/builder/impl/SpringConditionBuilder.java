@@ -17,10 +17,9 @@ public class SpringConditionBuilder<T> implements ConditionBuilder<T> {
         this.applicationContext = applicationContext;
     }
 
-    @SuppressWarnings({ "rawtypes", "unchecked" })
     @Override
     public Condition<T> build(RuleTemplate ruleTemplate) {
-        return new SpringCondition(applicationContext, ruleTemplate.getSpringMethod());
+        return new SpringCondition<T>(applicationContext, ruleTemplate.getSpringMethod());
     }
 
     @Override

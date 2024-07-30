@@ -9,7 +9,7 @@ import com.pw.rulesengine.rule.impl.JavaAction;
 import com.pw.rulesengine.ruleengine.RuleTemplate;
 
 @Service
-public class JavaActionBuilder<T> implements ActionBuilder<T> {
+public class JavaActionBuilder<U> implements ActionBuilder<U> {
 
     private final ApplicationContext applicationContext;
 
@@ -18,10 +18,11 @@ public class JavaActionBuilder<T> implements ActionBuilder<T> {
     }
 
     @Override
-    public Action build(RuleTemplate ruleTemplate) {
+    public Action<U> build(RuleTemplate ruleTemplate) {
         try {
             ClassLoader classLoader = applicationContext.getClassLoader();
-            Class<? extends JavaAction> ruleClass = (Class<? extends JavaAction>)classLoader.loadClass(ruleTemplate.getActionClassName());
+            @SuppressWarnings({ "null", "unchecked" })
+            Class<? extends JavaAction<U>> ruleClass = (Class<? extends JavaAction<U>>)classLoader.loadClass(ruleTemplate.getActionClassName());
             return ruleClass.getDeclaredConstructor().newInstance();
         } catch (Exception e) {
             throw new RuntimeException("Failed to create rule instance", e);

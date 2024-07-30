@@ -9,17 +9,16 @@ import com.pw.rulesengine.rule.impl.SpringAction;
 import com.pw.rulesengine.ruleengine.RuleTemplate;
 
 @Service
-public class SpringActionBuilder<T> implements ActionBuilder<T> {
+public class SpringActionBuilder<U> implements ActionBuilder<U> {
     private final ApplicationContext applicationContext;
 
     public SpringActionBuilder(ApplicationContext applicationContext) {
         this.applicationContext = applicationContext;
     }
 
-    @SuppressWarnings({ "rawtypes", "unchecked" })
     @Override
-    public Action<T> build(RuleTemplate ruleTemplate) {
-        return new SpringAction(applicationContext, ruleTemplate.getSpringMethod());
+    public Action<U> build(RuleTemplate ruleTemplate) {
+        return new SpringAction<U>(applicationContext, ruleTemplate.getSpringMethod());
     }
 
     @Override

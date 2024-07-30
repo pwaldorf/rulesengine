@@ -30,13 +30,13 @@ public class MvelAction<U> implements Action<U> {
 
     @SuppressWarnings("unchecked")
     @Override
-    public void execute(U o) {
+    public void execute(U u) {
         if(StringUtils.isBlank(expression)) {
             return;
         }
-        if (o instanceof Map) {
-            ((Map<String, Object>) o).putAll(context);
+        if (u instanceof Map) {
+            ((Map<String, Object>) u).putAll(context);
         }
-        MVEL.executeExpression(compiledExpression, o, Void.class);
+        MVEL.executeExpression(compiledExpression, u, Void.class);
     }
 }

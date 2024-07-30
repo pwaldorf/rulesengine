@@ -10,9 +10,8 @@ import com.pw.rulesengine.ruleengine.RuleTemplate;
 @Service
 public class MvelConditionBuilder<T> implements ConditionBuilder<T> {
 
-    @SuppressWarnings({ "rawtypes", "unchecked" })
     public Condition<T> build(RuleTemplate ruleTemplate) {
-        return new MvelCondition(ruleTemplate.getExpression().getEvaluateExpression(), ruleTemplate.getExpression().getContext());
+        return new MvelCondition<T>(ruleTemplate.getExpression().getEvaluateExpression(), ruleTemplate.getExpression().getContext());
     }
 
     @Override

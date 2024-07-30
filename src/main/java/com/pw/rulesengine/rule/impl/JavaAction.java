@@ -2,10 +2,10 @@ package com.pw.rulesengine.rule.impl;
 
 import com.pw.rulesengine.rule.Action;
 
-public interface JavaAction<T> extends Action<T> {
+public interface JavaAction<U> extends Action<U> {
 
-    default String getType() {
-        return "JAVA";
+    @Override
+    default public String getType() {
+         return "JAVA";
     }
-
 }

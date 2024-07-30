@@ -13,7 +13,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class DefaultRule<T,U> implements Rule<T,U>{
+public class DefaultRule<T, U> implements Rule<T, U>{
 
     private Condition<T> condition;
     private Action<U> action;

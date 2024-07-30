@@ -18,10 +18,11 @@ public class JavaConditionBuilder<T> implements ConditionBuilder<T> {
     }
 
     @Override
-    public Condition build(RuleTemplate ruleTemplate) {
+    public Condition<T> build(RuleTemplate ruleTemplate) {
         try {
             ClassLoader classLoader = applicationContext.getClassLoader();
-            Class<? extends JavaCondition> ruleClass = (Class<? extends JavaCondition>)classLoader.loadClass(ruleTemplate.getConditionClassName());
+            @SuppressWarnings({ "null", "unchecked" })
+            Class<? extends JavaCondition<T>> ruleClass = (Class<? extends JavaCondition<T>>)classLoader.loadClass(ruleTemplate.getConditionClassName());
             return ruleClass.getDeclaredConstructor().newInstance();
         } catch (Exception e) {
             throw new RuntimeException("Failed to create rule instance", e);

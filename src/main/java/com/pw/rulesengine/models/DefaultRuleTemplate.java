@@ -1,5 +1,7 @@
 package com.pw.rulesengine.models;
 
+import com.pw.rulesengine.rule.Expression;
+import com.pw.rulesengine.rule.SpringMethod;
 import com.pw.rulesengine.ruleengine.RuleTemplate;
 
 import lombok.AllArgsConstructor;
@@ -20,12 +22,12 @@ public class DefaultRuleTemplate implements RuleTemplate {
     private String description;
 
     // MVEL Rules
-    private DefaultExpression expression;
+    private Expression expression;
 
     // JAVA Rules
     private String conditionClassName;
     private String actionClassName;
 
     // Spring Rules
-    private DefaultSpringMethod springMethod;
+    private SpringMethod springMethod;
 }

@@ -10,4 +10,5 @@ public class SampleJavaAction implements JavaAction<Map<String, Object>>{
     public void execute(Map<String, Object> context) {
         System.out.println("Java Rule Executed");
     }
+
 }

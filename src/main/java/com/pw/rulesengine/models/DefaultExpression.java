@@ -2,6 +2,8 @@ package com.pw.rulesengine.models;
 
 import java.util.Map;
 
+import com.pw.rulesengine.rule.Expression;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -11,10 +13,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-public class DefaultExpression {
+public class DefaultExpression implements Expression {
     String evaluateExpression;
     String passExpression;
     String failExpression;
     String alwaysExpression;
-    Map<String, String> context;
+    Map<String, Object> context;
 }

@@ -8,11 +8,10 @@ import com.pw.rulesengine.rule.impl.MvelAction;
 import com.pw.rulesengine.ruleengine.RuleTemplate;
 
 @Service
-public class MvelActionBuilder<T> implements ActionBuilder<T> {
+public class MvelActionBuilder<U> implements ActionBuilder<U> {
 
-    @SuppressWarnings({ "rawtypes", "unchecked" })
-    public Action<T> build(RuleTemplate ruleTemplate) {
-        return new MvelAction(ruleTemplate.getExpression().getPassExpression(), ruleTemplate.getExpression().getContext());
+    public Action<U> build(RuleTemplate ruleTemplate) {
+        return new MvelAction<U>(ruleTemplate.getExpression().getPassExpression(), ruleTemplate.getExpression().getContext());
     }
 
     @Override

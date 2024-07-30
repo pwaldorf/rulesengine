@@ -6,15 +6,15 @@ import java.util.Map;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.context.ApplicationContext;
 
-import com.pw.rulesengine.models.DefaultSpringMethod;
 import com.pw.rulesengine.rule.Action;
+import com.pw.rulesengine.rule.SpringMethod;
 
 public class SpringAction<U> implements Action<U>{
 
     private final ApplicationContext applicationContext;
-    private final DefaultSpringMethod springMethod;
+    private final SpringMethod springMethod;
 
-    public SpringAction(ApplicationContext applicationContext, DefaultSpringMethod springMethod) {
+    public SpringAction(ApplicationContext applicationContext, SpringMethod springMethod) {
         this.applicationContext = applicationContext;
         this.springMethod = springMethod;
     }
@@ -25,12 +25,12 @@ public class SpringAction<U> implements Action<U>{
     }
 
     @Override
-    public void execute(U o) {
+    public void execute(U u) {
         if (StringUtils.isBlank(springMethod.getPassMethodName()) ||
         StringUtils.isBlank(springMethod.getPassBeanName())) {
             return;
         }
-        invokeMethod(springMethod.getPassBeanName(), springMethod.getPassMethodName(), o);
+        invokeMethod(springMethod.getPassBeanName(), springMethod.getPassMethodName(), u);
     }
 
     private void invokeMethod(String beanName, String methodName, U u) {

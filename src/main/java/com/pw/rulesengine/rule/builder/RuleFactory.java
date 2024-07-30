@@ -10,15 +10,17 @@ import org.springframework.stereotype.Component;
 import jakarta.annotation.PostConstruct;
 
 @Component
-public class RuleFactory {
+public class RuleFactory<T, U> {
 
+    @SuppressWarnings("rawtypes")
     private static Map<String, ConditionBuilder> conditionBuilderCache = new ConcurrentHashMap<>();
+    @SuppressWarnings("rawtypes")
     private static Map<String, ActionBuilder> actionBuilderCache = new ConcurrentHashMap<>();
 
-    private List<ConditionBuilder> conditionBuilders = new ArrayList<>();
-    private List<ActionBuilder> actionBuilders = new ArrayList<>();
+    private List<ConditionBuilder<T>> conditionBuilders = new ArrayList<>();
+    private List<ActionBuilder<U>> actionBuilders = new ArrayList<>();
 
-    public RuleFactory(List<ConditionBuilder> conditionBuilders, List<ActionBuilder> actionBuilders) {
+    public RuleFactory(List<ConditionBuilder<T>> conditionBuilders, List<ActionBuilder<U>> actionBuilders) {
         this.conditionBuilders = conditionBuilders;
         this.actionBuilders = actionBuilders;
     }
@@ -33,11 +35,13 @@ public class RuleFactory {
         ));
     }
 
-    public ConditionBuilder getConditionBuilder(String type) {
+    @SuppressWarnings("unchecked")
+    public ConditionBuilder<T> getConditionBuilder(String type) {
         return conditionBuilderCache.get(type);
     }
 
-    public ActionBuilder getActionBuilder(String type) {
+    @SuppressWarnings("unchecked")
+    public ActionBuilder<U> getActionBuilder(String type) {
         return actionBuilderCache.get(type);
     }
 }

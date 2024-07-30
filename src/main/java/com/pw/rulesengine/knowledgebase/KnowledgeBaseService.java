@@ -14,6 +14,8 @@ import com.pw.rulesengine.knowledgebase.db.RulesRepository;
 import com.pw.rulesengine.models.DefaultExpression;
 import com.pw.rulesengine.models.DefaultRuleTemplate;
 import com.pw.rulesengine.models.DefaultSpringMethod;
+import com.pw.rulesengine.rule.SpringMethod;
+import com.pw.rulesengine.rule.Expression;
 import com.pw.rulesengine.ruleengine.KnowledgeBaseRepository;
 import com.pw.rulesengine.ruleengine.RuleTemplate;
 
@@ -44,7 +46,7 @@ public class KnowledgeBaseService implements KnowledgeBaseRepository{
 
     private RuleTemplate mapFromDbModel(RuleDbModel ruleDbModel){
 
-        DefaultExpression defaultExpression = DefaultExpression.builder()
+        Expression expression = DefaultExpression.builder()
                 .evaluateExpression(ruleDbModel.getCondition())
                 .passExpression(ruleDbModel.getPass())
                 .failExpression(ruleDbModel.getFail())
@@ -53,7 +55,7 @@ public class KnowledgeBaseService implements KnowledgeBaseRepository{
                                 createMapFromDelimitedString(ruleDbModel.getContext()) : Collections.emptyMap())
                 .build();
 
-        DefaultSpringMethod springMethod = DefaultSpringMethod.builder()
+        SpringMethod springMethod = DefaultSpringMethod.builder()
                 .evaluateBeanName(ruleDbModel.getConditionBeanName())
                 .evaluateMethodName(ruleDbModel.getConditionBeanMethod())
                 .passBeanName(ruleDbModel.getPassBeanName())
@@ -70,7 +72,7 @@ public class KnowledgeBaseService implements KnowledgeBaseRepository{
                 .priority(ruleDbModel.getPriority())
                 .conditionType(ruleDbModel.getConditionType().toUpperCase())
                 .actionType(ruleDbModel.getActionType().toUpperCase())
-                .expression(defaultExpression)
+                .expression(expression)
                 .conditionClassName(ruleDbModel.getConditionClassName())
                 .actionClassName(ruleDbModel.getActionClassName())
                 .springMethod(springMethod)
@@ -78,8 +80,8 @@ public class KnowledgeBaseService implements KnowledgeBaseRepository{
                 .build();
     }
 
-    private Map<String, String> createMapFromDelimitedString(String input) {
-        Map<String, String> map = new HashMap<>();
+    private Map<String, Object> createMapFromDelimitedString(String input) {
+        Map<String, Object> map = new HashMap<>();
 
         // Split the input string by commas to get key-value pairs
         String[] pairs = input.split(",");
@@ -93,7 +95,6 @@ public class KnowledgeBaseService implements KnowledgeBaseRepository{
                 map.put(key, value);
             }
         }
-
         return map;
     }
 }
