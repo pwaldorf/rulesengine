@@ -12,12 +12,14 @@ import org.springframework.stereotype.Service;
 import com.pw.rulesengine.knowledgebase.db.RuleDbModel;
 import com.pw.rulesengine.knowledgebase.db.RulesRepository;
 import com.pw.rulesengine.models.DefaultExpression;
+import com.pw.rulesengine.models.DefaultJavaClassName;
 import com.pw.rulesengine.models.DefaultRuleTemplate;
 import com.pw.rulesengine.models.DefaultSpringMethod;
 import com.pw.rulesengine.rule.SpringMethod;
 import com.pw.rulesengine.rule.Expression;
+import com.pw.rulesengine.rule.JavaClassName;
+import com.pw.rulesengine.rule.RuleTemplate;
 import com.pw.rulesengine.ruleengine.KnowledgeBaseRepository;
-import com.pw.rulesengine.ruleengine.RuleTemplate;
 
 @Service
 public class KnowledgeBaseService implements KnowledgeBaseRepository{
@@ -51,8 +53,14 @@ public class KnowledgeBaseService implements KnowledgeBaseRepository{
                 .passExpression(ruleDbModel.getPass())
                 .failExpression(ruleDbModel.getFail())
                 .alwaysExpression(ruleDbModel.getAlways())
-                .context(StringUtils.isNotBlank(ruleDbModel.getContext()) ?
-                                createMapFromDelimitedString(ruleDbModel.getContext()) : Collections.emptyMap())
+                .evaluateContext(StringUtils.isNotBlank(ruleDbModel.getConditionContext()) ?
+                                createMapFromDelimitedString(ruleDbModel.getConditionContext()) : Collections.emptyMap())
+                .passContext(StringUtils.isNotBlank(ruleDbModel.getPassContext()) ?
+                                createMapFromDelimitedString(ruleDbModel.getPassContext()) : Collections.emptyMap())
+                .failContext(StringUtils.isNotBlank(ruleDbModel.getFailContext()) ?
+                                createMapFromDelimitedString(ruleDbModel.getFailContext()) : Collections.emptyMap())
+                .alwaysContext(StringUtils.isNotBlank(ruleDbModel.getAlwaysContext()) ?
+                                createMapFromDelimitedString(ruleDbModel.getAlwaysContext()) : Collections.emptyMap())
                 .build();
 
         SpringMethod springMethod = DefaultSpringMethod.builder()
@@ -66,15 +74,24 @@ public class KnowledgeBaseService implements KnowledgeBaseRepository{
                 .alwaysMethodName(ruleDbModel.getAlwaysBeanMethod())
                 .build();
 
+        JavaClassName javaClassName = DefaultJavaClassName.builder()
+            .conditionClassName(ruleDbModel.getConditionClassName())
+            .passClassName(ruleDbModel.getPassClassName())
+            .failClassName(ruleDbModel.getFailClassName())
+            .alwaysClassName(ruleDbModel.getAlwaysClassName())
+            .build();
+
         return DefaultRuleTemplate.builder()
                 .rulesetName(ruleDbModel.getRulesetName().toUpperCase())
                 .ruleId(ruleDbModel.getRuleId().toUpperCase())
                 .priority(ruleDbModel.getPriority())
                 .conditionType(ruleDbModel.getConditionType().toUpperCase())
-                .actionType(ruleDbModel.getActionType().toUpperCase())
+                .passActionType(ruleDbModel.getPassActionType().toUpperCase())
+                .failActionType(ruleDbModel.getFailActionType().toUpperCase())
+                .alwaysActionType(ruleDbModel.getAlwaysActionType().toUpperCase())
+                .statementType(getStatementType(ruleDbModel))
                 .expression(expression)
-                .conditionClassName(ruleDbModel.getConditionClassName())
-                .actionClassName(ruleDbModel.getActionClassName())
+                .javaClassName(javaClassName)
                 .springMethod(springMethod)
                 .description(ruleDbModel.getDescription())
                 .build();
@@ -96,5 +113,16 @@ public class KnowledgeBaseService implements KnowledgeBaseRepository{
             }
         }
         return map;
+    }
+
+    private String getStatementType(RuleDbModel ruleDbModel) {
+
+        if (StringUtils.isNotBlank(ruleDbModel.getAlwaysActionType())) {
+            return "ALWAYS";
+        }
+        if (StringUtils.isNotBlank(ruleDbModel.getFailActionType())) {
+            return "FAIL";
+        }
+        return "SIMPLE";
     }
 }

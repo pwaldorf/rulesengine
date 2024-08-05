@@ -1,4 +1,4 @@
-package com.pw.rulesengine.rule.builder;
+package com.pw.rulesengine.rulebuilder;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -7,16 +7,16 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.context.ApplicationContext;
 
 import com.pw.rulesengine.rule.Action;
-import com.pw.rulesengine.rule.SpringMethod;
+import com.pw.rulesengine.rulebuilder.model.SpringBean;
 
 public class SpringAction<U> implements Action<U>{
 
     private final ApplicationContext applicationContext;
-    private final SpringMethod springMethod;
+    private final SpringBean springBean;
 
-    public SpringAction(ApplicationContext applicationContext, SpringMethod springMethod) {
+    public SpringAction(ApplicationContext applicationContext, SpringBean springBean) {
         this.applicationContext = applicationContext;
-        this.springMethod = springMethod;
+        this.springBean = springBean;
     }
 
     @Override
@@ -26,11 +26,11 @@ public class SpringAction<U> implements Action<U>{
 
     @Override
     public void execute(U u) {
-        if (StringUtils.isBlank(springMethod.getPassMethodName()) ||
-        StringUtils.isBlank(springMethod.getPassBeanName())) {
+        if (StringUtils.isBlank(springBean.getMethodName()) ||
+        StringUtils.isBlank(springBean.getBeanName())) {
             return;
         }
-        invokeMethod(springMethod.getPassBeanName(), springMethod.getPassMethodName(), u);
+        invokeMethod(springBean.getBeanName(), springBean.getMethodName(), u);
     }
 
     private void invokeMethod(String beanName, String methodName, U u) {

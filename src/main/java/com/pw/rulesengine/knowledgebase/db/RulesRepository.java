@@ -10,5 +10,6 @@ import com.pw.rulesengine.knowledgebase.db.RuleDbModel.IdClass;
 @Repository
 public interface RulesRepository extends JpaRepository<RuleDbModel, IdClass> {
     List<RuleDbModel> findByRulesetName(String rulesetName);
+    @SuppressWarnings("null")
     List<RuleDbModel> findAll();
 }

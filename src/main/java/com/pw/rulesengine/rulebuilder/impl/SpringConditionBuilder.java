@@ -1,12 +1,12 @@
-package com.pw.rulesengine.rule.builder.impl;
+package com.pw.rulesengine.rulebuilder.impl;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Service;
 
 import com.pw.rulesengine.rule.Condition;
-import com.pw.rulesengine.rule.builder.ConditionBuilder;
+import com.pw.rulesengine.rule.RuleTemplate;
 import com.pw.rulesengine.rule.impl.SpringCondition;
-import com.pw.rulesengine.ruleengine.RuleTemplate;
+import com.pw.rulesengine.rulebuilder.ConditionBuilder;
 
 @Service
 public class SpringConditionBuilder<T> implements ConditionBuilder<T> {

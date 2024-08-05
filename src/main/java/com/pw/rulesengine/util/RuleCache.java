@@ -1,14 +1,12 @@
 package com.pw.rulesengine.util;
 
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 import org.springframework.stereotype.Component;
 
 import com.pw.rulesengine.rule.Rule;
-import com.pw.rulesengine.rule.builder.DefaultRuleBuilder;
-import com.pw.rulesengine.rule.builder.RuleFactory;
-import com.pw.rulesengine.ruleengine.KnowledgeBaseRepository;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -16,41 +14,17 @@ import lombok.extern.slf4j.Slf4j;
 @Component
 public class RuleCache {
 
-    public static Map<String, Map<String, Rule>> rulesetCache = new ConcurrentHashMap<>();
-
-    private final RuleFactory ruleFactory;
-    private final KnowledgeBaseRepository knowledgeBaseRepository;
-
-    public RuleCache(RuleFactory ruleFactory, KnowledgeBaseRepository knowledgeBaseRepository) {
-        this.ruleFactory = ruleFactory;
-        this.knowledgeBaseRepository = knowledgeBaseRepository;
-    }
+    private Map<String, Map<String, Rule>> rulesetCache = new ConcurrentHashMap<>();
 
     public Map<String, Rule> getRuleset(String rulesetName) {
-        return rulesetCache.computeIfAbsent(rulesetName, this::loadRuleset);
+        return rulesetCache.get(rulesetName);
     }
 
-    private Map<String, Rule> loadRuleset(String rulesetName) {
+    public void addRuleset(String rulesetName, String ruleId, Rule rule) {
 
-        log.info("Loading ruleset: {}", rulesetName);
-        Map<String, Rule> rules = new ConcurrentHashMap<>();
+        log.info("Loading ruleset: {} ruleId: {}", rulesetName, ruleId);
 
-        knowledgeBaseRepository.getAllRuleByRuleSetName(rulesetName).forEach(ruleTemplate -> {
-            rules.put(ruleTemplate.getRuleId(), new DefaultRuleBuilder(ruleFactory).build(ruleTemplate));
-        });;
-
-        return rules;
-    }
-
-    public void clearCache() {
-        rulesetCache.clear();
-    }
-
-    public void evictRuleset(String rulesetName) {
-        rulesetCache.remove(rulesetName);
-    }
-
-    public void evictRule(String rulesetName, String ruleId) {
-        rulesetCache.get(rulesetName).remove(ruleId);
+        Map<String, Rule> map = rulesetCache.computeIfAbsent(rulesetName, k -> new LinkedHashMap<>());
+        map.put(ruleId, rule);
     }
 }

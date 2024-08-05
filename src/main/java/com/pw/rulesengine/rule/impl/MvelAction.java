@@ -7,19 +7,19 @@ import org.apache.commons.lang3.StringUtils;
 import org.mvel2.MVEL;
 
 import com.pw.rulesengine.rule.Action;
+import com.pw.rulesengine.rulebuilder.model.MvelExpression;
 
 public class MvelAction<U> implements Action<U> {
 
-    private final String expression;
-    private final Map<String, Object> context;
+    private final MvelExpression mvelExpression;
 
     private Serializable compiledExpression;
 
-    public  MvelAction(String expression, Map<String, Object> context) {
-        this.expression = expression;
-        this.context = context;
+    public  MvelAction(MvelExpression mvelExpression) {
+        this.mvelExpression = mvelExpression;
 
-        this.compiledExpression = StringUtils.isNotBlank(expression) ? MVEL.compileExpression(expression) : null;
+        this.compiledExpression = StringUtils.isNotBlank(mvelExpression.getExpression())
+                                ? MVEL.compileExpression(mvelExpression.getExpression()) : null;
 
     }
 
@@ -31,11 +31,11 @@ public class MvelAction<U> implements Action<U> {
     @SuppressWarnings("unchecked")
     @Override
     public void execute(U u) {
-        if(StringUtils.isBlank(expression)) {
+        if(StringUtils.isBlank(mvelExpression.getExpression())) {
             return;
         }
         if (u instanceof Map) {
-            ((Map<String, Object>) u).putAll(context);
+            ((Map<String, Object>) u).putAll(mvelExpression.getContext());
         }
         MVEL.executeExpression(compiledExpression, u, Void.class);
     }

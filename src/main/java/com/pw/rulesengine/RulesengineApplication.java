@@ -8,6 +8,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 
 import com.pw.rulesengine.controller.RulesController;
+import com.pw.rulesengine.ruleengine.RuleEngine;
 
 @SpringBootApplication
 public class RulesengineApplication {
@@ -16,7 +17,9 @@ public class RulesengineApplication {
 		//SpringApplication.run(RulesengineApplication.class, args);
 		ConfigurableApplicationContext context = SpringApplication.run(RulesengineApplication.class, args);
 
-		RulesController rulesController = context.getBean(RulesController.class);
+
+		RulesController<String, Map<String, Object>> rulesController
+					= new RulesController<>((RuleEngine<String, Map<String, Object>>)context.getBean("simpleRuleEngine"));
 
 		Map<String, Object> map = new LinkedHashMap<>();
 		map.put("debitAmount", Integer.valueOf(5));

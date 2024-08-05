@@ -1,16 +1,23 @@
 
-INSERT INTO rules (ruleset_name, rule_id, priority, condition_type, action_type, condition, pass, fail, always, context, condition_class_name, action_class_name, condition_bean_name, condition_bean_method, pass_bean_name, pass_bean_method, fail_bean_name, fail_bean_method, always_bean_name, always_bean_method, description)
+INSERT INTO rules (ruleset_name, rule_id, priority, condition_type, pass_action_type, fail_action_type, always_action_type, condition_context, condition, pass_context, pass, fail_context, fail, always_context, always, condition_class_name, pass_class_name, fail_class_name, always_class_name, condition_bean_name, condition_bean_method, pass_bean_name, pass_bean_method, fail_bean_name, fail_bean_method, always_bean_name, always_bean_method, description)
        VALUES (
        'NRT_RULESET_TEST1',
        'NRT_TEST1',
        '1',
        'MVEL',
        'MVEL',
-       'debitAmount < 10',
-       'System.out.println("PJW MVEL")',
        ' ',
        ' ',
        'Field1:Value1',
+       'debitAmount < 10',
+       ' ',
+       'System.out.println("PJW MVEL")',
+       ' ',
+       ' ',
+       ' ',
+       ' ',
+       ' ',
+       ' ',
        ' ',
        ' ',
        ' ',
@@ -23,18 +30,25 @@ INSERT INTO rules (ruleset_name, rule_id, priority, condition_type, action_type,
        ' ',
        'Debit Amount greater than 10');
 
-INSERT INTO rules (ruleset_name, rule_id, priority, condition_type, action_type, condition, pass, fail, always, context, condition_class_name, action_class_name, condition_bean_name, condition_bean_method, pass_bean_name, pass_bean_method, fail_bean_name, fail_bean_method, always_bean_name, always_bean_method, description)
+INSERT INTO rules (ruleset_name, rule_id, priority, condition_type, pass_action_type, fail_action_type, always_action_type, condition_context, condition, pass_context, pass, fail_context, fail, always_context, always, condition_class_name, pass_class_name, fail_class_name, always_class_name, condition_bean_name, condition_bean_method, pass_bean_name, pass_bean_method, fail_bean_name, fail_bean_method, always_bean_name, always_bean_method, description)
        VALUES (
        'NRT_RULESET_TEST1',
        'NRT_TEST11',
        '1',
        'SPRING',
        'MVEL',
-       'debitAmount < 10',
+       ' ',
+       ' ',
+       ' ',
+       ' ',
+       ' ',
        'System.out.println("PJW MVEL")',
        ' ',
        ' ',
-       'Field1:Value1',
+       ' ',
+       ' ',
+       ' ',
+       ' ',
        ' ',
        ' ',
        'sampleSpringRules',
@@ -48,13 +62,20 @@ INSERT INTO rules (ruleset_name, rule_id, priority, condition_type, action_type,
        'Debit Amount greater than 15');
 
 -- *************************************************************************************************************************************************************************************
-INSERT INTO rules (ruleset_name, rule_id, priority, condition_type, action_type, condition, pass, fail, always, context, condition_class_name, action_class_name, condition_bean_name, condition_bean_method, pass_bean_name, pass_bean_method, fail_bean_name, fail_bean_method, always_bean_name, always_bean_method, description)
+INSERT INTO rules (ruleset_name, rule_id, priority, condition_type, pass_action_type, fail_action_type, always_action_type, condition_context, condition, pass_context, pass, fail_context, fail, always_context, always, condition_class_name, pass_class_name, fail_class_name, always_class_name, condition_bean_name, condition_bean_method, pass_bean_name, pass_bean_method, fail_bean_name, fail_bean_method, always_bean_name, always_bean_method, description)
        VALUES (
        'NRT_RULESET_TEST1',
        'NRT_TEST2',
        '2',
        'SPRING',
        'SPRING',
+       ' ',
+       ' ',
+       ' ',
+       ' ',
+       ' ',
+       ' ',
+       ' ',
        ' ',
        ' ',
        ' ',
@@ -73,7 +94,7 @@ INSERT INTO rules (ruleset_name, rule_id, priority, condition_type, action_type,
        'Debit Amount greater than 10');
 
 -- *************************************************************************************************************************************************************************************
-INSERT INTO rules (ruleset_name, rule_id, priority, condition_type, action_type, condition, pass, fail, always, context, condition_class_name, action_class_name, condition_bean_name, condition_bean_method, pass_bean_name, pass_bean_method, fail_bean_name, fail_bean_method, always_bean_name, always_bean_method, description)
+INSERT INTO rules (ruleset_name, rule_id, priority, condition_type, pass_action_type, fail_action_type, always_action_type, condition_context, condition, pass_context, pass, fail_context, fail, always_context, always, condition_class_name, pass_class_name, fail_class_name, always_class_name, condition_bean_name, condition_bean_method, pass_bean_name, pass_bean_method, fail_bean_name, fail_bean_method, always_bean_name, always_bean_method, description)
        VALUES (
        'NRT_RULESET_TEST1',
        'NRT_TEST3',
@@ -85,8 +106,15 @@ INSERT INTO rules (ruleset_name, rule_id, priority, condition_type, action_type,
        ' ',
        ' ',
        ' ',
+       ' ',
+       ' ',
+       ' ',
+       ' ',
+       ' ',
        'com.pw.rulesengine.samplerules.SampleJavaCondition',
        'com.pw.rulesengine.samplerules.SampleJavaAction',
+       ' ',
+       ' ',
        ' ',
        ' ',
        ' ',

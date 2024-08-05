@@ -14,9 +14,15 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Data
 public class DefaultExpression implements Expression {
+    Map<String, Object> evaluateContext;
     String evaluateExpression;
+
+    Map<String, Object> passContext;
     String passExpression;
+
+    Map<String, Object> failContext;
     String failExpression;
+
+    Map<String, Object> alwaysContext;
     String alwaysExpression;
-    Map<String, Object> context;
 }

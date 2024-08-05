@@ -1,23 +1,22 @@
 package com.pw.rulesengine.controller;
 
-import java.util.Map;
-
-import org.springframework.stereotype.Service;
-import com.pw.rulesengine.ruleengine.DefaultRuleEngine;
+import org.springframework.stereotype.Component;
+import com.pw.rulesengine.ruleengine.RuleEngine;
 
 // using controller class incase a factory for different ruleengines is made
 
-@Service
-public class RulesController {
+@Component
+public class RulesController<T, U> {
 
-    private final DefaultRuleEngine ruleEngine;
+    private final RuleEngine<T, U> ruleEngine;
 
-    public RulesController(DefaultRuleEngine ruleEngine) {
+    public RulesController(RuleEngine<T, U> ruleEngine) {
         this.ruleEngine = ruleEngine;
     }
 
-    public String runRules(String rulesetName, Map<String, Object> context) {
-        ruleEngine.run(rulesetName, context);
+    // public String runRules(String rulesetName, Map<String, Object> context) {
+    public String runRules(T t, U u) {
+        ruleEngine.run(t, u);
         return "Rules executed!";
     }
 }
