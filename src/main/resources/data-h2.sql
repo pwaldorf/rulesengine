@@ -1,18 +1,44 @@
 
-INSERT INTO rules (ruleset_name, rule_id, priority, condition_type, pass_action_type, fail_action_type, always_action_type, condition_context, condition, pass_context, pass, fail_context, fail, always_context, always, condition_class_name, pass_class_name, fail_class_name, always_class_name, condition_bean_name, condition_bean_method, pass_bean_name, pass_bean_method, fail_bean_name, fail_bean_method, always_bean_name, always_bean_method, description)
+INSERT INTO workflow (process_name
+                 , step_group
+                 , step_order
+                 , step_rule_type
+                 , step_pass_type
+                 , step_fail_type
+                 , step_always_type
+                 , break_on_pass
+                 , break_on_fail
+                 , step_rule_context
+                 , step_rule
+                 , step_pass_context
+                 , step_pass
+                 , step_fail_context
+                 , step_fail
+                 , step_always_context
+                 , step_always
+                 , step_rule_class_name
+                 , step_pass_class_name
+                 , step_fail_class_name
+                 , step_always_class_name
+                 , step_rule_bean_name
+                 , step_rule_bean_method
+                 , step_pass_bean_name
+                 , step_pass_bean_method
+                 , step_fail_bean_name
+                 , step_fail_bean_method
+                 , step_always_bean_name
+                 , step_always_bean_method
+                 , description)
        VALUES (
        'NRT_RULESET_TEST1',
-       'NRT_TEST1',
-       '1',
-       'MVEL',
-       'MVEL',
+       'startGroup',
+       1,
+       'SPRING',
+       'STEPGROUP',
        ' ',
        ' ',
-       'Field1:Value1',
-       'debitAmount < 10',
-       ' ',
-       'System.out.println("PJW MVEL")',
-       ' ',
+       'false',
+       'true',
        ' ',
        ' ',
        ' ',
@@ -22,6 +48,136 @@ INSERT INTO rules (ruleset_name, rule_id, priority, condition_type, pass_action_
        ' ',
        ' ',
        ' ',
+       'NRT_RULESET_TEST2',
+       ' ',
+       ' ',
+       'testPerfRules',
+       'isSourceSystemGTM',
+       ' ',
+       ' ',
+       ' ',
+       ' ',
+       ' ',
+       ' ',
+       'Source System GTM');
+
+INSERT INTO workflow (process_name
+                 , step_group
+                 , step_order
+                 , step_rule_type
+                 , step_pass_type
+                 , step_fail_type
+                 , step_always_type
+                 , break_on_pass
+                 , break_on_fail
+                 , step_rule_context
+                 , step_rule
+                 , step_pass_context
+                 , step_pass
+                 , step_fail_context
+                 , step_fail
+                 , step_always_context
+                 , step_always
+                 , step_rule_class_name
+                 , step_pass_class_name
+                 , step_fail_class_name
+                 , step_always_class_name
+                 , step_rule_bean_name
+                 , step_rule_bean_method
+                 , step_pass_bean_name
+                 , step_pass_bean_method
+                 , step_fail_bean_name
+                 , step_fail_bean_method
+                 , step_always_bean_name
+                 , step_always_bean_method
+                 , description)
+       VALUES (
+       'NRT_RULESET_TEST1',
+       'NRT_RULESET_TEST2',
+       2,
+       'SPRING',
+       'SPRING',
+       ' ',
+       ' ',
+       'false',
+       'false',
+       ' ',
+       ' ',
+       ' ',
+       ' ',
+       ' ',
+       ' ',
+       ' ',
+       ' ',
+       ' ',
+       ' ',
+       ' ',
+       ' ',
+       'testPerfRules',
+       'isCurrencyCLS',
+       'testPerfRules',
+       'setStatusCode',
+       ' ',
+       ' ',
+       ' ',
+       ' ',
+       'Check CLS Currency');
+
+-- *************************************************************************************************************************************************************************************
+INSERT INTO workflow (process_name
+                 , step_group
+                 , step_order
+                 , step_rule_type
+                 , step_pass_type
+                 , step_fail_type
+                 , step_always_type
+                 , break_on_pass
+                 , break_on_fail
+                 , step_rule_context
+                 , step_rule
+                 , step_pass_context
+                 , step_pass
+                 , step_fail_context
+                 , step_fail
+                 , step_always_context
+                 , step_always
+                 , step_rule_class_name
+                 , step_pass_class_name
+                 , step_fail_class_name
+                 , step_always_class_name
+                 , step_rule_bean_name
+                 , step_rule_bean_method
+                 , step_pass_bean_name
+                 , step_pass_bean_method
+                 , step_fail_bean_name
+                 , step_fail_bean_method
+                 , step_always_bean_name
+                 , step_always_bean_method
+                 , description)
+       VALUES (
+       'NRT_RULESET_TEST1',
+       'NRT_RULESET_TEST2',
+       3,
+       'SPRING',
+       'STEPGROUP',
+       ' ',
+       ' ',
+       'false',
+       'false',
+       ' ',
+       ' ',
+       ' ',
+       ' ',
+       ' ',
+       ' ',
+       ' ',
+       ' ',
+       ' ',
+       'NRT_RULESET_TEST3',
+       ' ',
+       ' ',
+       'testPerfRules',
+       'isStatusCodeSOKS',
        ' ',
        ' ',
        ' ',
@@ -30,45 +186,47 @@ INSERT INTO rules (ruleset_name, rule_id, priority, condition_type, pass_action_
        ' ',
        'Debit Amount greater than 10');
 
-INSERT INTO rules (ruleset_name, rule_id, priority, condition_type, pass_action_type, fail_action_type, always_action_type, condition_context, condition, pass_context, pass, fail_context, fail, always_context, always, condition_class_name, pass_class_name, fail_class_name, always_class_name, condition_bean_name, condition_bean_method, pass_bean_name, pass_bean_method, fail_bean_name, fail_bean_method, always_bean_name, always_bean_method, description)
-       VALUES (
-       'NRT_RULESET_TEST1',
-       'NRT_TEST11',
-       '1',
-       'SPRING',
-       'MVEL',
-       ' ',
-       ' ',
-       ' ',
-       ' ',
-       ' ',
-       'System.out.println("PJW MVEL")',
-       ' ',
-       ' ',
-       ' ',
-       ' ',
-       ' ',
-       ' ',
-       ' ',
-       ' ',
-       'sampleSpringRules',
-       'isAdult',
-       ' ',
-       ' ',
-       ' ',
-       ' ',
-       ' ',
-       ' ',
-       'Debit Amount greater than 15');
-
 -- *************************************************************************************************************************************************************************************
-INSERT INTO rules (ruleset_name, rule_id, priority, condition_type, pass_action_type, fail_action_type, always_action_type, condition_context, condition, pass_context, pass, fail_context, fail, always_context, always, condition_class_name, pass_class_name, fail_class_name, always_class_name, condition_bean_name, condition_bean_method, pass_bean_name, pass_bean_method, fail_bean_name, fail_bean_method, always_bean_name, always_bean_method, description)
+INSERT INTO workflow (process_name
+                 , step_group
+                 , step_order
+                 , step_rule_type
+                 , step_pass_type
+                 , step_fail_type
+                 , step_always_type
+                 , break_on_pass
+                 , break_on_fail
+                 , step_rule_context
+                 , step_rule
+                 , step_pass_context
+                 , step_pass
+                 , step_fail_context
+                 , step_fail
+                 , step_always_context
+                 , step_always
+                 , step_rule_class_name
+                 , step_pass_class_name
+                 , step_fail_class_name
+                 , step_always_class_name
+                 , step_rule_bean_name
+                 , step_rule_bean_method
+                 , step_pass_bean_name
+                 , step_pass_bean_method
+                 , step_fail_bean_name
+                 , step_fail_bean_method
+                 , step_always_bean_name
+                 , step_always_bean_method
+                 , description)
        VALUES (
        'NRT_RULESET_TEST1',
-       'NRT_TEST2',
-       '2',
+       'NRT_RULESET_TEST3',
+       4,
        'SPRING',
+       ' ',
+       ' ',
        'SPRING',
+       'false',
+       'false',
        ' ',
        ' ',
        ' ',
@@ -81,46 +239,12 @@ INSERT INTO rules (ruleset_name, rule_id, priority, condition_type, pass_action_
        ' ',
        ' ',
        ' ',
-       ' ',
-       ' ',
-       'sampleSpringRules',
-       'isAdult',
-       'sampleSpringRules',
-       'sayHello',
+       'testPerfRules',
+       'isFullSwiftBic',
        ' ',
        ' ',
        ' ',
        ' ',
-       'Debit Amount greater than 10');
-
--- *************************************************************************************************************************************************************************************
-INSERT INTO rules (ruleset_name, rule_id, priority, condition_type, pass_action_type, fail_action_type, always_action_type, condition_context, condition, pass_context, pass, fail_context, fail, always_context, always, condition_class_name, pass_class_name, fail_class_name, always_class_name, condition_bean_name, condition_bean_method, pass_bean_name, pass_bean_method, fail_bean_name, fail_bean_method, always_bean_name, always_bean_method, description)
-       VALUES (
-       'NRT_RULESET_TEST1',
-       'NRT_TEST3',
-       '3',
-       'JAVA',
-       'JAVA',
-       ' ',
-       ' ',
-       ' ',
-       ' ',
-       ' ',
-       ' ',
-       ' ',
-       ' ',
-       ' ',
-       ' ',
-       'com.pw.rulesengine.samplerules.SampleJavaCondition',
-       'com.pw.rulesengine.samplerules.SampleJavaAction',
-       ' ',
-       ' ',
-       ' ',
-       ' ',
-       ' ',
-       ' ',
-       ' ',
-       ' ',
-       ' ',
-       ' ',
+       'testPerfRules',
+       'setSourceSystemId',
        'Animal Name Tiger');
