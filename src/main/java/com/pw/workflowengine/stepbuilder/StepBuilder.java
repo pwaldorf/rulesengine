@@ -1,8 +1,8 @@
 package com.pw.workflowengine.stepbuilder;
 
+import com.pw.workflowengine.workflow.Action;
 import com.pw.workflowengine.workflow.Step;
-import com.pw.workflowengine.workflow.StepTemplate;
 
-public interface StepBuilder<K, V> {
-    Step<K, V> build(StepTemplate<K, V> ruleTemplate);
+public interface StepBuilder {
+    Action<String, Object> build(Step step);
 }

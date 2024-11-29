@@ -12,7 +12,7 @@ public class SampleIonRules {
         return "CLS".equalsIgnoreCase(map.get("BuyCurrency").toString()) || "CLS".equalsIgnoreCase(map.get("SellCurrency").toString());
     }
 
-    public boolean isSOKSStatusCode(Map<String, Object> map) {
+    public boolean isStatusCode(Map<String, Object> map) {
         String statusCode = map.get("CLSStatusCode").toString();
         statusCode = statusCode.endsWith("/") ? statusCode.substring(0, statusCode.length() - 1) : statusCode.substring(1);
         return "SOKS".equalsIgnoreCase(statusCode);

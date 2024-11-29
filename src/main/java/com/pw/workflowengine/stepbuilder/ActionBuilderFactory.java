@@ -10,14 +10,14 @@ import org.springframework.stereotype.Component;
 import jakarta.annotation.PostConstruct;
 
 @Component
-public class StepFactory<K, V> {
+public class ActionBuilderFactory<K, V> {
 
     @SuppressWarnings("rawtypes")
     private static Map<String, ActionBuilder> actionBuilderCache = new ConcurrentHashMap<>();
 
     private List<ActionBuilder<K, V>> actionBuilders = new ArrayList<>();
 
-    public StepFactory(List<ActionBuilder<K, V>> actionBuilders) {
+    public ActionBuilderFactory(List<ActionBuilder<K, V>> actionBuilders) {
         this.actionBuilders = actionBuilders;
     }
 

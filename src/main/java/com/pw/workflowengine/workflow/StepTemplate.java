@@ -1,56 +1,63 @@
 package com.pw.workflowengine.workflow;
 
-public interface StepTemplate<K, V> {
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.pw.workflowengine.workflow.StepTemplate;
 
-    String getProcessName();
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.extern.jackson.Jacksonized;
 
-    String getStepGroup();
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@Data
+@Jacksonized
+@SuppressWarnings("rawtypes")
+public class StepTemplate {
 
-    Integer getOrder();
+    @JsonProperty(value = "stepGroupName", required = true)
+    private String stepGroupName;
 
-    String getStepRuleType();
+    @JsonProperty(value = "stepGroup", required = true)
+    private String stepGroup;
 
-    String getStepPassType();
+    @JsonProperty(value = "stepOrder", required = true)
+    private Integer stepOrder;
 
-    String getStepFailType();
+    @JsonProperty(value = "stepTemplateName", required = true)
+    private String stepTemplateName;
 
-    String getStepAlwaysType();
+    @JsonProperty(value = "stepRule", required = true)
+    private String stepRuleName;
 
-    String getDescription();
+    private Action stepRuleAction;
 
-    boolean isBreakOnPass();
+    @JsonProperty("stepPass")
+    private String stepPassName;
 
-    boolean isBreakOnFail();
+    private Action stepPassAction;
 
-    Expression<K, V> getExpression();
+    @Builder.Default
+    @JsonProperty("breakOnPass")
+    private boolean breakOnPass = false;
 
-    JavaClassName getJavaClassName();
+    @JsonProperty("stepFail")
+    private String stepFailName;
 
-    SpringMethod getSpringMethod();
+    private Action stepFailAction;
 
-    void setProcessName(String processName);
+    @Builder.Default
+    @JsonProperty("breakOnFail")
+    private boolean breakOnFail = false;
 
-    void setStepGroup(String stepGroup);
+    @JsonProperty("stepAlways")
+    private String stepAlwaysName;
 
-    void setOrder(Integer order);
+    private Action stepAlwaysAction;
 
-    void setStepRuleType(String stepRuleType);
+    @JsonProperty("stepDescription")
+    private String description;
 
-    void setStepPassType(String stepPassType);
-
-    void setStepFailType(String stepFailType);
-
-    void setStepAlwaysType(String stepAlwaysType);
-
-    void setDescription(String description);
-
-    void setBreakOnPass(boolean breakOnPass);
-
-    void setBreakOnFail(boolean breakOnFail);
-
-    void setExpression(Expression<K, V> expression);
-
-    void setJavaClassName(JavaClassName javaClassName);
-
-    void setSpringMethod(SpringMethod springMethod);
 }

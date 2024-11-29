@@ -1,22 +1,19 @@
 package com.pw.workflowengine.workflow;
 
+import java.util.List;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
-
-@Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class StepGroup {
+@Data
+public class StepGroups {
 
-    @JsonProperty("stepGroupName")
-    private String stepGroupName;
-
-    @JsonProperty("stepTemplates")
-    private List<StepTemplate> stepTemplates;
+    @JsonProperty("stepGroups")
+    private List<StepGroup> stepGroups;
 
 }

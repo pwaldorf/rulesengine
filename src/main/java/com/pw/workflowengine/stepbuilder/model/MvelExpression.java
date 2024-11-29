@@ -9,5 +9,5 @@ import lombok.Setter;
 @Setter
 public class MvelExpression{
     String expression;
-    Map<String, Object> context;
+    Map<String, String> context;
 }

@@ -2,10 +2,12 @@ package com.pw.workflowengine.stepengine;
 
 import java.util.List;
 
-import com.pw.workflowengine.workflow.StepTemplate;
+import com.pw.workflowengine.workflow.Step;
+import com.pw.workflowengine.workflow.StepGroup;
 
-public interface WorkflowResource<K, V> {
+public interface WorkflowResource {
 
-    public List<StepTemplate<K, V>> getAllSteps();
-    public List<StepTemplate<K, V>> getAllStepsByProcessName(String processName);
+    public List<StepGroup> getStepGroupsByProcessName(String processName);
+
+    public List<Step> getStepsByProcessName(String processName);
 }

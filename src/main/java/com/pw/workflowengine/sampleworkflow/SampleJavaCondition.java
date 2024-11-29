@@ -1,15 +1,14 @@
 package com.pw.workflowengine.sampleworkflow;
 
 import java.util.Map;
-import com.pw.workflowengine.workflow.impl.JavaCondition;
 
-import lombok.NoArgsConstructor;
+import com.pw.workflowengine.workflow.StepGroup;
+import com.pw.workflowengine.workflow.impl.JavaAction;
 
-@NoArgsConstructor
-public class SampleJavaCondition implements JavaCondition<String, Object> {
+public class SampleJavaCondition extends JavaAction<String, Object> {
 
     @Override
-    public boolean evaluate(Map<String, Object> context) {
+    public boolean execute(Map<String, Object> context, Map<String, StepGroup> stepGroups) {
         return (context.get("animal")).toString().equals("tiger");
     }
 

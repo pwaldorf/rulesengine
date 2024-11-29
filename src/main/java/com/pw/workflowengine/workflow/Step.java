@@ -1,16 +1,36 @@
 package com.pw.workflowengine.workflow;
 
-// import com.pw.workflowengine.stepengine.Statement;
+import java.util.Map;
 
-public interface Step<K, V> {
+import com.fasterxml.jackson.annotation.JsonProperty;
 
-    public Condition<K, V> getCondition();
-    void setCondition(Condition<K, V> condition);
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-    default Action<K, V> getPassAction() {return null;};
-    default Action<K, V> getFailAction() {return null;};
-    default Action<K, V> getAlwaysAction() {return null;};
+@NoArgsConstructor
+@AllArgsConstructor
+@Data
+public class Step {
 
-    default boolean isBreakOnPass() {return false;};
-    default boolean isBreakOnFail() {return false;};
+    @JsonProperty(value = "stepName", required = true)
+    private String stepName;
+
+    // JAVA, SPRING, MVEL, GROOVY, STEPGROUP
+    @JsonProperty(value = "stepType", required = true)
+    private String stepType;
+
+    // Java - Full Class Name
+    // Spring - Bean.Method
+    // MVEL - MVEL Script
+    // Groovy - Groovy Script
+    @JsonProperty(value = "stepObject", required = true)
+    private String stepObject;
+
+    @JsonProperty("stepContext")
+    private Map<String, String> stepContext;
+
+    @JsonProperty("description")
+    private String description;
+
 }

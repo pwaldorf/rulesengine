@@ -2,10 +2,22 @@ package com.pw.workflowengine.workflow.impl;
 
 import com.pw.workflowengine.workflow.Action;
 
-public interface JavaAction<K, V> extends Action<K, V> {
+public abstract class JavaAction<K, V> implements Action<K, V> {
+
+    private String actionName;
 
     @Override
-    default public String getType() {
+    public String getActionName() {
+        return actionName;
+    }
+
+    public void setActionName(String actionName) {
+        this.actionName = actionName;
+    }
+
+    @Override
+    public String getType() {
          return "JAVA";
     }
+
 }

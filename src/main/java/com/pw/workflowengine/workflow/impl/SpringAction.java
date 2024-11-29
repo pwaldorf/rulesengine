@@ -12,6 +12,8 @@ import com.pw.workflowengine.workflow.StepGroup;
 
 public class SpringAction implements Action<String, Object>{
 
+    private String actionName;
+
     private final ApplicationContext applicationContext;
     private final SpringBean springBean;
 
@@ -21,24 +23,33 @@ public class SpringAction implements Action<String, Object>{
     }
 
     @Override
+    public String getActionName() {
+        return actionName;
+    }
+
+    public void setActionName(String actionName) {
+        this.actionName = actionName;
+    }
+
+    @Override
     public String getType() {
         return "SPRING";
     }
 
     @Override
-    public void execute(Map<String, Object> context, Map<String, StepGroup<String, Object>> stepGroups) {
+    public boolean execute(Map<String, Object> context, Map<String, StepGroup> stepGroups) {
         if (StringUtils.isBlank(springBean.getMethodName()) ||
         StringUtils.isBlank(springBean.getBeanName())) {
-            return;
+            return true;
         }
-        invokeMethod(springBean.getBeanName(), springBean.getMethodName(), context);
+        return invokeMethod(springBean.getBeanName(), springBean.getMethodName(), context);
     }
 
-    private void invokeMethod(String beanName, String methodName, Map<String, Object> context) {
+    private boolean invokeMethod(String beanName, String methodName, Map<String, Object> context) {
         try {
             Object bean = applicationContext.getBean(beanName);
             Method method = bean.getClass().getMethod(methodName, Map.class);
-            method.invoke(bean, context);
+            return (boolean) method.invoke(bean, context);
         } catch (Exception e) {
             throw new RuntimeException("Error invokinging rule with bean method: " + methodName, e);
         }

@@ -5,11 +5,12 @@ import java.util.Map;
 import com.pw.workflowengine.workflow.StepGroup;
 import com.pw.workflowengine.workflow.impl.JavaAction;
 
-public class SampleJavaAction implements JavaAction<String, Object>{
+public class SampleJavaAction extends JavaAction<String, Object> {
 
     @Override
-    public void execute(Map<String, Object> context, Map<String, StepGroup<String, Object>> stepGroups) {
-        System.out.println("Java Rule Executed");
+    public boolean execute(Map<String, Object> context, Map<String, StepGroup> stepGroups) {
+        // System.out.println("Java Rule Executed");
+        return true;
     }
 
 }

@@ -7,14 +7,14 @@ import org.springframework.stereotype.Repository;
 
 import com.pw.workflowengine.workflowloader.db.WorkflowDbModel.IdClass;
 
-import jakarta.persistence.OrderBy;
+// import jakarta.persistence.OrderBy;
 
 @Repository
 public interface WorkflowRepository extends JpaRepository<WorkflowDbModel, IdClass> {
 
     // @OrderBy("StepGroup,StepOrder")
     // @OrderBy("stepOrder")
-    List<WorkflowDbModel> findByProcessNameOrderByStepOrderAsc(String processName);
+    WorkflowDbModel findByProcessName(String processName);
     @SuppressWarnings("null")
     List<WorkflowDbModel> findAll();
 }
