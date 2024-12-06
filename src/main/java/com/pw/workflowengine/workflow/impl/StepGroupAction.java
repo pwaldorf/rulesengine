@@ -12,21 +12,10 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class StepGroupAction<K, V> implements Action<K, V> {
 
-    private String actionName;
-
     private final String stepGroupName;
 
     public StepGroupAction(String stepGroupName) {
         this.stepGroupName = stepGroupName;
-    }
-
-    @Override
-    public String getActionName() {
-        return actionName;
-    }
-
-    public void setActionName(String actionName) {
-        this.actionName = actionName;
     }
 
     @Override

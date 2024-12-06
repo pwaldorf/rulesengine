@@ -27,6 +27,9 @@ public class Step {
     @JsonProperty(value = "stepObject", required = true)
     private String stepObject;
 
+    @JsonProperty("stepMethod")
+    private String stepMethod;
+
     @JsonProperty("stepContext")
     private Map<String, String> stepContext;
 

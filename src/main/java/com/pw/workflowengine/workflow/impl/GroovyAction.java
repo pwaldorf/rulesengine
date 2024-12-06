@@ -11,7 +11,6 @@ import groovy.lang.GroovyClassLoader;
 
 public class GroovyAction implements Action<String, Object> {
 
-    private String actionName;
     private GroovyScript script;
 
     @SuppressWarnings({ "unchecked"})
@@ -34,14 +33,4 @@ public class GroovyAction implements Action<String, Object> {
     public String getType() {
         return "GROOVY";
     }
-
-    public void setActionName(String actionName) {
-        this.actionName = actionName;
-    }
-
-    @Override
-    public String getActionName() {
-        return actionName;
-    }
-
 }

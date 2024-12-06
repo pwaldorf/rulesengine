@@ -12,23 +12,12 @@ import com.pw.workflowengine.workflow.StepGroup;
 
 public class SpringAction implements Action<String, Object>{
 
-    private String actionName;
-
     private final ApplicationContext applicationContext;
     private final SpringBean springBean;
 
     public SpringAction(ApplicationContext applicationContext, SpringBean springBean) {
         this.applicationContext = applicationContext;
         this.springBean = springBean;
-    }
-
-    @Override
-    public String getActionName() {
-        return actionName;
-    }
-
-    public void setActionName(String actionName) {
-        this.actionName = actionName;
     }
 
     @Override

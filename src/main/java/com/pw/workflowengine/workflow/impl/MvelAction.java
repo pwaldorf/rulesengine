@@ -11,8 +11,6 @@ import com.pw.workflowengine.workflow.StepGroup;
 
 public class MvelAction implements Action<String, Object> {
 
-    private String actionName;
-
     private final MvelExpression mvelExpression;
 
     private Serializable compiledExpression;
@@ -20,15 +18,6 @@ public class MvelAction implements Action<String, Object> {
     public  MvelAction(MvelExpression mvelExpression) {
         this.mvelExpression = mvelExpression;
         this.compiledExpression = MVEL.compileExpression(mvelExpression.getExpression());
-    }
-
-    @Override
-    public String getActionName() {
-        return actionName;
-    }
-
-    public void setActionName(String actionName) {
-        this.actionName = actionName;
     }
 
     @Override
