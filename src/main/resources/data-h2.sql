@@ -51,12 +51,12 @@ INSERT INTO workflow (process_name
     {
       "stepName": "isCurrencyCLS",
       "stepType": "JAVA",
-      "stepObject": "com.pw.workflowengine.sampleworkflow.SampleJavaAction"
+      "stepObject": "com.pw.scriptengine.sampleworkflow.SampleJavaAction"
     },
     {
       "stepName": "isStatusCodeSOKS",
       "stepType": "JAVA",
-      "stepObject": "com.pw.workflowengine.sampleworkflow.SampleJavaCondition"
+      "stepObject": "com.pw.scriptengine.sampleworkflow.SampleJavaCondition"
     }
   ]
      }',
