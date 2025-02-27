@@ -1,4 +1,4 @@
-package com.pw.scriptengine.workflowloader;
+package com.pw.scriptengine.scriptloader;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -7,7 +7,7 @@ import lombok.Setter;
 @Setter
 public class GwhScriptTemplate {
 
-    private String scriptClassName;
+    private String scriptName;
     private String scriptBody;
 
 }
