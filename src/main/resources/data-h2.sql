@@ -8,15 +8,19 @@ VALUES (
            1,
            'TestProcess',
            1,
-           'GroovyScriptProcessorB',
+           'GroovyScriptProcessorC',
            '
             package com.pw.groovy.actions
 
             import com.pw.scriptengine.scriptloader.GroovyScript
             import groovy.transform.CompileStatic
+            import org.springframework.stereotype.Component
+            import org.springframework.context.annotation.Primary
 
             @CompileStatic
-            class GroovyScriptProcessorB implements GroovyScript {
+            @Component
+            @Primary
+            class GroovyScriptProcessorC implements GroovyScript {
 
                 @Override
                 void execute(Map<String, Object> context) {
@@ -40,7 +44,7 @@ VALUES (
                     }
                 }
             }',
-           'Test Script B'
+           'Test Script '
        );
 
 INSERT INTO script_template (id
@@ -53,20 +57,28 @@ VALUES (
            2,
            'TestProcess',
            2,
-           'GroovyScriptProcessorA',
+           'groovyScriptProcessorA',
            '
         package com.pw.groovy.actions
 
         import com.pw.scriptengine.scriptloader.GroovyScript
         import groovy.transform.CompileStatic
+        import org.springframework.stereotype.Component
+        import org.springframework.context.annotation.Primary
 
         @CompileStatic
+        @Primary
+        @Component
         class GroovyScriptProcessorA implements GroovyScript {
-             private final GroovyScript actionb
+             private final GroovyScriptProcessorC actionb
 
-             GroovyScriptProcessorA(GroovyScript actionb) {
+             GroovyScriptProcessorA(GroovyScriptProcessorC actionb) {
                  this.actionb = actionb
              }
+
+             GroovyScriptProcessorA() {
+
+              }
 
              void execute(Map<String, Object> context) {
                 String sourceSystemName = (String) context.get("SourceSystemName")
@@ -96,65 +108,4 @@ VALUES (
             }
         }',
            'Test Script'
-       );
-
-INSERT INTO script_template (id
-                            , profile_name
-                            , script_order
-                            , script_name
-                            , script_body
-                            , description)
-VALUES (
-           3,
-           'TestProcess',
-           3,
-           'GroovyScriptProcessor',
-           '
-        package com.pw.groovy.actions
-
-        import com.pw.scriptengine.scriptloader.GroovyScript
-        import groovy.transform.CompileStatic
-
-        @CompileStatic
-        class GroovyScriptProcessor implements GroovyScript {
-
-            void execute(Map map) {
-                GroovyScriptProcessorB actionb = new GroovyScriptProcessorB()
-                GroovyScriptProcessorA actiona = new GroovyScriptProcessorA(actionb)
-                actiona.execute(map)
-            }
-        }',
-           'Test Script A'
-       );
-
-INSERT INTO script_template (id
-                            , profile_name
-                            , script_order
-                            , script_name
-                            , script_body
-                            , description)
-VALUES (
-           4,
-           'SampleProcess',
-           1,
-           'MySampleGroovyProcessor',
-           '
-        package com.pw.groovy.actions
-
-        import com.pw.scriptengine.scriptloader.GroovyScript
-        import groovy.transform.CompileStatic
-
-        import com.pw.action.MySampleGroovy
-        import com.pw.action.MySampleGroovyB
-
-        @CompileStatic
-        class GroovyScriptProcessor implements GroovyScript {
-
-            void execute(Map map) {
-                MySampleGroovyB actionb = new MySampleGroovyB()
-                MySampleGroovy  actiona = new MySampleGroovy(actionb)
-                actiona.execute(map)
-            }
-        }',
-           'Test Script A'
        );

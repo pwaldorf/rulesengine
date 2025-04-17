@@ -1,15 +1,22 @@
-package com.pw.action;
+package com.pw.action
 
+import com.pw.scriptengine.bean.MySampleBeanC;
 import com.pw.scriptengine.scriptloader.GroovyScript
 import groovy.transform.CompileStatic
+import org.springframework.context.annotation.DependsOn
+import org.springframework.stereotype.Component
 
 @CompileStatic
+@Component
+@DependsOn("gwhScriptLoader")
 class MySampleGroovy implements GroovyScript {
 
-    private final GroovyScript actionb
+    private final MySampleGroovyB actionb
+    private final MySampleBeanC sampleBeanC
 
-    MySampleGroovy(GroovyScript actionb) {
+    MySampleGroovy(MySampleGroovyB actionb,  MySampleBeanC sampleBeanC) {
         this.actionb = actionb
+        this.sampleBeanC = sampleBeanC
     }
 
     void execute(Map<String, Object> context) {
@@ -30,6 +37,7 @@ class MySampleGroovy implements GroovyScript {
 
             if ("SOKS".equalsIgnoreCase(statusCode)) {
                 actionb.execute(context)
+                sampleBeanC.execute(context)
             }
         } else {
             context.put("Status", "IGNORE")

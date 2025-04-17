@@ -3,8 +3,13 @@ package com.pw.scriptengine.scriptloader;
 import com.pw.scriptengine.scriptloader.db.ScriptTemplate;
 import com.pw.scriptengine.scriptloader.db.ScriptTemplateService;
 import groovy.lang.GroovyClassLoader;
+import jakarta.annotation.PostConstruct;
 import org.codehaus.groovy.control.CompilerConfiguration;
+import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
+import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.context.support.GenericApplicationContext;
 import org.springframework.stereotype.Component;
+import org.springframework.web.servlet.view.ContentNegotiatingViewResolver;
 
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
@@ -14,21 +19,30 @@ import java.util.List;
 public class GwhScriptLoader {
 
     private final ScriptTemplateService scriptTemplateService;
+    private final ConfigurableApplicationContext applicationContext;
 
     private final GroovyClassLoader groovyClassLoader;
 
     private final ConcurrentHashMap<String, Class<?>> compiledClasses = new ConcurrentHashMap<>();
+    private final ContentNegotiatingViewResolver contentNegotiatingViewResolver;
 
-    public GwhScriptLoader(ScriptTemplateService  scriptTemplateService) {
+    public GwhScriptLoader(ScriptTemplateService  scriptTemplateService, GenericApplicationContext applicationContext, ContentNegotiatingViewResolver contentNegotiatingViewResolver) {
         this.scriptTemplateService = scriptTemplateService;
+        this.applicationContext = applicationContext;
 
         CompilerConfiguration config = new CompilerConfiguration();
         config.setScriptBaseClass(GroovyScript.class.getName());
         config.setTargetBytecode("17");
         groovyClassLoader = new GroovyClassLoader(this.getClass().getClassLoader(), config);
+        this.contentNegotiatingViewResolver = contentNegotiatingViewResolver;
     }
 
-    public GroovyScript loadScript(String profileName) {
+    @PostConstruct
+    public void init() {
+        loadScript("TestProcess");
+    }
+
+    public void loadScript(String profileName) {
 
         List<ScriptTemplate> scriptTemplates = scriptTemplateService.getScriptTemplates(profileName);
         if (scriptTemplates.isEmpty()) {
@@ -36,12 +50,11 @@ public class GwhScriptLoader {
         }
 
         try {
-            Class<?> compiledClass = null;
             for (ScriptTemplate scriptTemplate : scriptTemplates) {
-                compiledClass = loadAndCache(scriptTemplate.getScriptBody(), scriptTemplate.getScriptName());
+                Class<?> compiledClass = loadAndCache(scriptTemplate.getScriptBody(), scriptTemplate.getScriptName());
+                DynamicScriptRegistrar.registerGroovyBean(compiledClass, scriptTemplate.getScriptName(), applicationContext);
             }
 
-            return  (GroovyScript) compiledClass.getDeclaredConstructor().newInstance();
         } catch (Exception e) {
             throw new RuntimeException("Error loading Groovy script", e);
         }

@@ -8,7 +8,7 @@ class MySampleGroovyBTest {
     @Test
     void testSetSystemId_WithValidGroupKey() {
         // Arrange
-        MySampleGroovyB groovyScript = new MySampleGroovyB()
+        MySampleGroovyBImpl groovyScript = new MySampleGroovyBImpl()
         Map<String, Object> context = new HashMap<>()
         context.put("GroupKey", "TEST123")
 
@@ -22,7 +22,7 @@ class MySampleGroovyBTest {
     @Test
     void testSetSystemId_WithNullGroupKey() {
         // Arrange
-        MySampleGroovyB groovyScript = new MySampleGroovyB()
+        MySampleGroovyBImpl groovyScript = new MySampleGroovyBImpl()
         Map<String, Object> context = new HashMap<>()
         context.put("GroupKey", null)
 
@@ -36,7 +36,7 @@ class MySampleGroovyBTest {
     @Test
     void testSetSystemId_WithoutGroupKey() {
         // Arrange
-        MySampleGroovyB groovyScript = new MySampleGroovyB()
+        MySampleGroovyBImpl groovyScript = new MySampleGroovyBImpl()
         Map<String, Object> context = new HashMap<>()
 
         // Act

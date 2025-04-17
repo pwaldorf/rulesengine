@@ -3,13 +3,16 @@ package com.pw.scriptengine;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.pw.action.MySampleGroovy;
 import com.pw.scriptengine.scriptloader.GroovyScript;
 import com.pw.scriptengine.scriptloader.GwhScriptLoader;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
+@ComponentScan(basePackages = "com.pw")
 public class WorkflowApplication {
 
 	public static void main(String[] args) {
@@ -31,8 +34,7 @@ public class WorkflowApplication {
 				"SenderBic", "CHASEUS33"
 		));
 
-		GwhScriptLoader scriptLoader = context.getBean(GwhScriptLoader.class);
-		GroovyScript groovyObject = scriptLoader.loadScript("SampleProcess");
+		MySampleGroovy groovyObject = context.getBean(MySampleGroovy.class);
 
 		measureExecutionTime(() -> {
 			for (int i = 0; i < 1000; i++) {
@@ -60,8 +62,11 @@ public class WorkflowApplication {
 				"SenderBic", "CHASEUS33"
 		));
 
-		GwhScriptLoader scriptLoader = context.getBean(GwhScriptLoader.class);
-		GroovyScript groovyObject = scriptLoader.loadScript("TestProcess");
+//		GwhScriptLoader scriptLoader = context.getBean(GwhScriptLoader.class);
+//		scriptLoader.loadScript("TestProcess");
+
+
+		GroovyScript groovyObject = (GroovyScript) context.getBean("groovyScriptProcessorA");
 
 		measureExecutionTime(() -> {
 			for (int i = 0; i < 1000; i++) {
