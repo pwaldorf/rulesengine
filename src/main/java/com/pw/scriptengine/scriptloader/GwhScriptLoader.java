@@ -5,7 +5,6 @@ import com.pw.scriptengine.scriptloader.db.ScriptTemplateService;
 import groovy.lang.GroovyClassLoader;
 import jakarta.annotation.PostConstruct;
 import org.codehaus.groovy.control.CompilerConfiguration;
-import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.GenericApplicationContext;
 import org.springframework.stereotype.Component;

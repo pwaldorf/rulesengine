@@ -5,7 +5,6 @@ import java.util.Map;
 
 import com.pw.action.MySampleGroovy;
 import com.pw.scriptengine.scriptloader.GroovyScript;
-import com.pw.scriptengine.scriptloader.GwhScriptLoader;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;

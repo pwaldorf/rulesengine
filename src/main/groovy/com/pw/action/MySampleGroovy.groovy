@@ -1,6 +1,6 @@
 package com.pw.action
 
-import com.pw.scriptengine.bean.MySampleBeanC;
+import com.pw.scriptengine.bean.MySampleBeanC
 import com.pw.scriptengine.scriptloader.GroovyScript
 import groovy.transform.CompileStatic
 import org.springframework.context.annotation.DependsOn
