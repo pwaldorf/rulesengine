@@ -61,10 +61,6 @@ public class WorkflowApplication {
 				"SenderBic", "CHASEUS33"
 		));
 
-//		GwhScriptLoader scriptLoader = context.getBean(GwhScriptLoader.class);
-//		scriptLoader.loadScript("TestProcess");
-
-
 		GroovyScript groovyObject = (GroovyScript) context.getBean("groovyScriptProcessorA");
 
 		measureExecutionTime(() -> {

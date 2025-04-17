@@ -8,7 +8,6 @@ import org.springframework.stereotype.Component
 
 @CompileStatic
 @Component
-@DependsOn("gwhScriptLoader")
 class MySampleGroovy implements GroovyScript {
 
     private final MySampleGroovyB actionb
